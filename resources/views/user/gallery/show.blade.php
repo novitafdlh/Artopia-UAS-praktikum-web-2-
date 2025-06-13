@@ -42,16 +42,16 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {{-- Bagian Kiri: Gambar Karya Seni --}}
                         <div class="relative group"> {{-- Menambahkan group untuk hover effect --}}
-                            <img src="{{ Storage::url($art->image_path) }}" alt="{{ $art->title }}" class="w-full h-auto object-cover rounded-lg shadow-xl border-2 border-[#8E8B9B] transform group-hover:scale-[1.01] transition duration-300 ease-in-out"> {{-- Border Artopia & efek hover --}}
-                            <div class="absolute inset-0 bg-[#0B2B26]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center"> {{-- Overlay pada hover --}}
-                                <i class="fas fa-search-plus text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i> {{-- Icon zoom --}}
+                            <img src="{{ Storage::url($art->image_path) }}" alt="{{ $art->title }}" class="w-full h-auto object-cover rounded-lg shadow-xl border-2 border-[#8E8B9B] transform group-hover:scale-[1.01] transition duration-300 ease-in-out"> 
+                            <div class="absolute inset-0 bg-[#0B2B26]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center"> 
+                                <i class="fas fa-search-plus text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i> 
                             </div>
                         </div>
                         
                         {{-- Bagian Kanan: Detail Karya Seni --}}
                         <div>
                             <h1 class="text-3xl lg:text-4xl font-extrabold mb-4 text-[#051F20] leading-tight">{{ $art->title }}</h1>
-                            <p class="text-[#163832] text-lg mb-6 leading-relaxed">{{ $art->description }}</p> {{-- Warna teks lebih gelap, leading lebih longgar --}}
+                            <p class="text-[#163832] text-lg mb-6 leading-relaxed">{{ $art->description }}</p> 
                             
                             <div class="mb-6">
                                 <p class="text-[#235347] text-sm mb-2"><strong class="font-semibold">Diunggah oleh:</strong> {{ $art->user->name ?? 'Anonim' }}</p>
@@ -73,7 +73,7 @@
                                         </form>
                                     </div>
                                 @endcan
-                                @can('view-artwork', $art) {{-- Contoh permission lain jika ada --}}
+                                @can('view-artwork', $art) 
                                     @unless(Auth::user()->can('manage-own-art', $art))
                                         <div class="mt-6">
                                             <a href="#" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#DAF1DE] to-[#8E8B9B] border border-transparent rounded-lg font-bold text-base text-[#051F20] uppercase tracking-wider hover:from-[#8E8B9B] hover:to-[#235347] focus:outline-none focus:ring-2 focus:ring-[#0B2B26] focus:ring-offset-2 transition ease-in-out duration-150">

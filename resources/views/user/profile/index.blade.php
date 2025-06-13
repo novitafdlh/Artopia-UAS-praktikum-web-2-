@@ -47,9 +47,6 @@
                         <a href="{{ route('user.profile.edit') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#235347] to-[#163832] border border-transparent rounded-lg font-bold text-base text-white uppercase tracking-wider hover:from-[#163832] hover:to-[#0B2B26] focus:outline-none focus:ring-2 focus:ring-[#8E8B9B] focus:ring-offset-2 transition ease-in-out duration-150">
                             Edit Profil <i class="ml-2 fas fa-edit"></i>
                         </a>
-                        <a href="{{ route('user.profile.edit_password') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#8E8B9B] to-[#235347] border border-transparent rounded-lg font-bold text-base text-white uppercase tracking-wider hover:from-[#235347] hover:to-[#163832] focus:outline-none focus:ring-2 focus:ring-[#DAF1DE] focus:ring-offset-2 transition ease-in-out duration-150">
-                            Ubah Password <i class="ml-2 fas fa-key"></i>
-                        </a>
                     </div>
                     
                     {{-- Bagian Hapus Akun --}}

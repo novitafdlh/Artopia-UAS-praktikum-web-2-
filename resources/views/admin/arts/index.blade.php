@@ -11,7 +11,6 @@
 @section('content')
     <div class="py-8 sm:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Pesan sukses dari session --}}
             @if (session('success'))
                 <div class="bg-[#DAF1DE] border border-[#235347] text-[#0B2B26] px-4 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
                     <span class="block sm:inline font-medium">{{ session('success') }}</span>
@@ -23,7 +22,6 @@
                     </span>
                 </div>
             @endif
-            {{-- Pesan error dari session --}}
             @if (session('error'))
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
                     <strong class="font-bold">Error!</strong>
@@ -46,7 +44,7 @@
                         </a>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full rounded-lg overflow-hidden"> {{-- Hapus semua kelas divide dan border di sini --}}
+                        <table class="min-w-full rounded-lg overflow-hidden"> 
                             <thead class="bg-[#235347]">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">ID</th>
@@ -57,7 +55,7 @@
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white"> {{-- Hapus semua kelas divide dan border di sini --}}
+                            <tbody class="bg-white">
                                 @forelse ($arts as $art)
                                     <tr class="hover:bg-gray-50">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $art->id }}</td>
@@ -85,14 +83,13 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr class="bg-white"> {{-- Pastikan background jika tidak ada data --}}
+                                    <tr class="bg-white">
                                         <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Tidak ada karya seni yang diunggah.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-                    {{-- Pagination --}}
                     <div class="mt-6">
                         {{ $arts->links() }}
                     </div>

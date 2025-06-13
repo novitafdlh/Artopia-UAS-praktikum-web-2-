@@ -19,7 +19,7 @@ class ArtworkController extends Controller
 
     public function create()
     {
-        $users = User::all();
+        $users = User::where('role', '!=', 'admin')->get();
         return view('admin.arts.create', compact('users'));
     }
 

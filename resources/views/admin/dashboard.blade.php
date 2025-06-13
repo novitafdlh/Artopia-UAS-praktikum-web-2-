@@ -3,15 +3,14 @@
 @section('title', 'Dashboard Admin')
 
 @section('header')
-    <h2 class="font-semibold text-xl text-[#051F20] leading-tight"> {{-- Ubah warna teks --}}
-        {{ __('Panel Admin Artopia') }} {{-- Ubah teks judul --}}
+    <h2 class="font-semibold text-xl text-[#051F20] leading-tight"> 
+        {{ __('Panel Admin Artopia') }}
     </h2>
 @endsection
 
 @section('content')
-    <div class="py-8 sm:py-12"> {{-- Sesuaikan padding vertikal --}}
+    <div class="py-8 sm:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Pesan sukses dari session --}}
             @if (session('success'))
                 <div class="bg-[#DAF1DE] border border-[#235347] text-[#0B2B26] px-4 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
                     <span class="block sm:inline font-medium">{{ session('success') }}</span>
@@ -23,7 +22,6 @@
                     </span>
                 </div>
             @endif
-            {{-- Pesan error dari session --}}
             @if (session('error'))
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
                     <strong class="font-bold">Error!</strong>
@@ -37,7 +35,7 @@
                 </div>
             @endif
 
-            <div class="bg-white rounded-lg shadow-xl overflow-hidden p-6 lg:p-8"> {{-- Kartu utama dengan shadow lebih kuat --}}
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden p-6 lg:p-8">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-2xl font-bold text-[#051F20] mb-6">Selamat datang di Panel Admin Artopia!</h3>
 

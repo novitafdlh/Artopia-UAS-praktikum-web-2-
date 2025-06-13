@@ -3,15 +3,14 @@
 @section('title', 'Manajemen User')
 
 @section('header')
-    <h2 class="font-semibold text-xl text-[#051F20] leading-tight"> {{-- Warna teks judul header --}}
-        {{ __('Manajemen Pengguna') }} {{-- Ubah teks judul --}}
+    <h2 class="font-semibold text-xl text-[#051F20] leading-tight">
+        {{ __('Manajemen Pengguna') }}
     </h2>
 @endsection
 
 @section('content')
-    <div class="py-8 sm:py-12"> {{-- Sesuaikan padding vertikal --}}
+    <div class="py-8 sm:py-12"> 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Pesan sukses dari session --}}
             @if (session('success'))
                 <div class="bg-[#DAF1DE] border border-[#235347] text-[#0B2B26] px-4 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
                     <span class="block sm:inline font-medium">{{ session('success') }}</span>
@@ -23,7 +22,6 @@
                     </span>
                 </div>
             @endif
-            {{-- Pesan error dari session --}}
             @if (session('error'))
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
                     <strong class="font-bold">Error!</strong>
@@ -37,19 +35,19 @@
                 </div>
             @endif
 
-            <div class="bg-white rounded-lg shadow-xl overflow-hidden p-6 lg:p-8"> {{-- Kartu utama --}}
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden p-6 lg:p-8">
                 <div class="p-6 text-gray-900">
                     <div class="mb-6 flex justify-between items-center">
-                        <h3 class="text-2xl font-bold text-[#051F20]">Daftar Pengguna Artopia</h3> {{-- Warna teks judul --}}
-                        <a href="{{ route('admin.user.create') }}" class="inline-flex items-center px-4 py-2 bg-[#163832] border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-[#0B2B26] focus:outline-none focus:ring-2 focus:ring-[#235347] focus:ring-offset-2 transition ease-in-out duration-150"> {{-- Tombol Tambah User --}}
+                        <h3 class="text-2xl font-bold text-[#051F20]">Daftar Pengguna Artopia</h3>
+                        <a href="{{ route('admin.user.create') }}" class="inline-flex items-center px-4 py-2 bg-[#163832] border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-[#0B2B26] focus:outline-none focus:ring-2 focus:ring-[#235347] focus:ring-offset-2 transition ease-in-out duration-150">
                             <i class="fas fa-plus mr-2"></i> Tambah User Baru
                         </a>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden"> {{-- Rounded tabel --}}
-                            <thead class="bg-[#235347]"> {{-- Warna thead --}}
+                        <table class="min-w-full divide-y divide-gray-200 rounded-lg overflow-hidden">
+                            <thead class="bg-[#235347]">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">ID</th> {{-- Warna teks header --}}
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">ID</th> 
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Nama</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Email</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Role</th>
@@ -66,19 +64,19 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ ucfirst($user->role) }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->created_at->format('d M Y') }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium flex items-center space-x-2">
-                                            <a href="{{ route('admin.user.edit', $user->id) }}" class="text-[#235347] hover:text-[#163832] transition duration-150"> {{-- Warna link Edit --}}
+                                            <a href="{{ route('admin.user.edit', $user->id) }}" class="text-[#235347] hover:text-[#163832] transition duration-150"> 
                                                 <i class="fas fa-edit"></i> Edit
                                             </a>
                                             @can('manage-users', $user)
                                                 <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Anda yakin ingin menghapus user ini? Semua karyanya juga akan dihapus secara permanen!');" class="inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:text-red-800 ml-2 transition duration-150"> {{-- Warna tombol Hapus --}}
+                                                    <button type="submit" class="text-red-600 hover:text-red-800 ml-2 transition duration-150">
                                                         <i class="fas fa-trash-alt"></i> Hapus
                                                     </button>
                                                 </form>
                                             @else
-                                                <span class="text-gray-400 ml-2 text-xs"><i class="fas fa-ban mr-1"></i> Tidak dapat dihapus</span> {{-- Warna teks tidak dapat dihapus --}}
+                                                <span class="text-gray-400 ml-2 text-xs"><i class="fas fa-ban mr-1"></i> Tidak dapat dihapus</span>
                                             @endcan
                                         </td>
                                     </tr>
@@ -90,9 +88,8 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- Pagination --}}
                     <div class="mt-6">
-                        {{ $users->links() }} {{-- Pagination biasanya sudah memiliki styling default dari Tailwind --}}
+                        {{ $users->links() }} 
                     </div>
                 </div>
             </div>

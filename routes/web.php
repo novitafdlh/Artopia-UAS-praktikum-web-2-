@@ -1,41 +1,27 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController; // Controller untuk autentikasi
+use App\Http\Controllers\AuthController; 
 
-// Controllers untuk area User/Public
+// Controllers untuk User
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\GalleryController;
 use App\Http\Controllers\User\ArtworkController as UserArtworkController;
 
-// Controllers untuk area Admin
+// Controllers untuk Admin
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ArtworkController as AdminArtworkController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 // --- Public / General Routes ---
-// Halaman utama akan menjadi galeri. Hapus Route::get('/', function () { return view('welcome'); });
 Route::get('/', [AuthController::class, 'login'])->name('login');
 
 // Galeri 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('user.gallery.index');
 Route::get('/gallery/{art}', [GalleryController::class, 'show'])->name('user.gallery.show');
 
-
-// --- Authentication Routes (Menggunakan AuthController tunggal) ---
-// Grup route untuk login, register, dan authenticate.
+// login, register, dan authenticate.
 Route::group(['as' => 'auth.'], function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
@@ -43,13 +29,8 @@ Route::group(['as' => 'auth.'], function () {
     Route::post('/register', [AuthController::class, 'store'])->name('store');
 });
 
-// Route Logout (di luar grup auth. karena akan diakses setelah login)
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
-// --- Authenticated User Routes ---
-// Semua route di sini membutuhkan user yang sudah login.
-// Prefix 'user.' akan ditambahkan ke nama route (misal: user.dashboard, user.profile.index)
 Route::middleware('auth')->name('user.')->group(function () {
     // User Dashboard
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
@@ -77,17 +58,13 @@ Route::middleware('auth')->name('user.')->group(function () {
 
 
 // --- Admin Routes ---
-// Hanya user yang terautentikasi dan memiliki izin 'access-admin-panel' yang bisa mengakses.
-// Prefix 'admin/' pada URL dan 'admin.' pada nama route.
 Route::middleware(['auth', 'can:access-admin-panel'])->prefix('admin')->name('admin.')->group(function () {
     // Admin Dashboard
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-    // Admin User Management (menggunakan 'user' sebagai resource name)
-    // Sesuai dengan folder admin/user dan UserController
+    // Admin User Management
     Route::resource('user', AdminUserController::class)->except(['show']);
 
-    // Admin Artwork Management (menggunakan 'artwork' sebagai resource name)
-    // Sesuai dengan folder admin/artwork dan ArtworkController
+    // Admin Artwork Management
     Route::resource('arts', \App\Http\Controllers\Admin\ArtworkController::class);
 });

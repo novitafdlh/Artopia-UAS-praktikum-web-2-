@@ -3,7 +3,7 @@
 @section('title', 'Edit Profil')
 
 @section('header')
-    <h2 class="font-semibold text-xl text-[#051F20] leading-tight"> {{-- Warna teks header --}}
+    <h2 class="font-semibold text-xl text-[#051F20] leading-tight"> 
         {{ __('Edit Profil Anda') }}
     </h2>
 @endsection
@@ -37,7 +37,7 @@
                 </div>
             @endif
 
-            <div class="bg-white rounded-lg shadow-xl overflow-hidden p-6 lg:p-8"> {{-- Kartu utama --}}
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden p-6 lg:p-8"> 
                 <div class="p-6 text-gray-900">
                     <h3 class="text-2xl font-bold text-[#051F20] mb-4">Informasi Profil Anda</h3>
                     <p class="mt-1 text-base text-gray-700 mb-6">Perbarui informasi profil dan alamat email akun Anda.</p>
@@ -46,21 +46,47 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="mb-4"> {{-- Margin bottom --}}
-                            <label for="name" class="block font-semibold text-sm text-zinc-700 mb-1">Nama</label> {{-- Label style --}}
+                        <div class="mb-4"> 
+                            <label for="name" class="block font-semibold text-sm text-zinc-700 mb-1">Nama</label> 
                             <input id="name" name="name" type="text" class="block mt-1 w-full px-4 py-3 border border-[#163832] bg-[#DAF1DE] rounded-lg shadow-inner-sm focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-[#235347] transition duration-200 ease-in-out text-[#051F20] placeholder-zinc-500" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">
                             @error('name')
                                 <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="mb-6"> {{-- Margin bottom --}}
+                        <div class="mb-6"> 
                             <label for="email" class="block font-semibold text-sm text-zinc-700 mb-1">Email</label>
                             <input id="email" name="email" type="email" class="block mt-1 w-full px-4 py-3 border border-[#163832] bg-[#DAF1DE] rounded-lg shadow-inner-sm focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-[#235347] transition duration-200 ease-in-out text-[#051F20] placeholder-zinc-500" value="{{ old('email', $user->email) }}" required autocomplete="username">
                             @error('email')
                                 <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <hr class="my-8 border-gray-300">
+
+                        <h3 class="text-xl font-semibold text-[#051F20] mb-4">Ubah Kata Sandi</h3>
+
+                        <div class="mb-4">
+                            <label for="current_password" class="block font-semibold text-sm text-zinc-700 mb-1">Password Saat Ini</label>
+                            <input id="current_password" name="current_password" type="password" class="block mt-1 w-full px-4 py-3 border border-[#163832] bg-[#DAF1DE] rounded-lg shadow-inner-sm focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-[#235347] text-[#051F20] placeholder-zinc-500" autocomplete="current-password">
+                            @error('current_password')
+                                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="block font-semibold text-sm text-zinc-700 mb-1">Password Baru</label>
+                            <input id="password" name="password" type="password" class="block mt-1 w-full px-4 py-3 border border-[#163832] bg-[#DAF1DE] rounded-lg shadow-inner-sm focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-[#235347] text-[#051F20] placeholder-zinc-500" autocomplete="new-password">
+                            @error('password')
+                                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="password_confirmation" class="block font-semibold text-sm text-zinc-700 mb-1">Konfirmasi Password Baru</label>
+                            <input id="password_confirmation" name="password_confirmation" type="password" class="block mt-1 w-full px-4 py-3 border border-[#163832] bg-[#DAF1DE] rounded-lg shadow-inner-sm focus:outline-none focus:ring-2 focus:ring-[#235347] focus:border-[#235347] text-[#051F20] placeholder-zinc-500" autocomplete="new-password">
+                        </div>
+
 
                         <div class="flex items-center justify-end mt-4">
                             <button type="submit" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#163832] to-[#235347] border border-transparent rounded-lg font-bold text-base text-white uppercase tracking-wider hover:from-[#0B2B26] hover:to-[#163832] focus:outline-none focus:ring-2 focus:ring-[#8E8B9B] focus:ring-offset-2 transition ease-in-out duration-150">

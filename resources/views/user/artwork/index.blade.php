@@ -3,15 +3,14 @@
 @section('title', 'Karya Seni Saya')
 
 @section('header')
-    <h2 class="font-semibold text-xl text-[#051F20] leading-tight"> {{-- Warna teks header --}}
+    <h2 class="font-semibold text-xl text-[#051F20] leading-tight"> 
         {{ __('Karya Seni Saya') }}
     </h2>
 @endsection
 
 @section('content')
-    <div class="py-8 sm:py-12"> {{-- Sesuaikan padding vertikal --}}
+    <div class="py-8 sm:py-12"> 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {{-- Pesan sukses dari session --}}
             @if (session('success'))
                 <div class="bg-[#DAF1DE] border border-[#235347] text-[#0B2B26] px-4 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
                     <span class="block sm:inline font-medium">{{ session('success') }}</span>
@@ -48,10 +47,10 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> {{-- Grid responsif --}}
                         @forelse ($arts as $art)
-                            <div class="relative bg-gradient-to-br from-[#163832] to-[#0B2B26] rounded-xl shadow-lg overflow-hidden group transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer border border-[#DAF1DE]"> {{-- Border tambahan untuk kesan "gallery frame" --}}
+                            <div class="relative bg-gradient-to-br from-[#163832] to-[#0B2B26] rounded-xl shadow-lg overflow-hidden group transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer border border-[#DAF1DE]">
                                 <a href="{{ route('user.gallery.show', $art->id) }}"> {{-- Link ke detail karya --}}
                                     <img src="{{ Storage::url($art->image_path) }}" alt="{{ $art->title }}" class="w-full h-48 object-cover object-center transition-transform duration-300 group-hover:scale-110">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-[#051F20]/70 to-transparent transition-all duration-300 opacity-0 group-hover:opacity-100"></div> {{-- Gradasi overlay gelap pada hover --}}
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#051F20]/70 to-transparent transition-all duration-300 opacity-0 group-hover:opacity-100"></div> 
                                     
                                     <div class="p-4 relative z-10 text-white">
                                         <h3 class="text-xl font-bold mb-1 truncate">{{ $art->title }}</h3>

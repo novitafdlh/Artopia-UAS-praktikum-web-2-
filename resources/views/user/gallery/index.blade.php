@@ -23,7 +23,6 @@
                     </span>
                 </div>
             @endif
-            {{-- Pesan error dari session --}}
             @if (session('error'))
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6 shadow-md" role="alert">
                     <strong class="font-bold">Error!</strong>
@@ -41,15 +40,15 @@
                 <div class="p-6 text-gray-900">
                     <h3 class="text-2xl font-bold text-[#051F20] mb-6">Jelajahi Koleksi Karya Seni Artopia</h3>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-h-[600px] overflow-y-auto pr-2">
                         @forelse ($arts as $art)
-                            <div class="relative bg-gradient-to-br from-[#163832] to-[#0B2B26] rounded-xl shadow-lg overflow-hidden group transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer border border-[#DAF1DE]"> {{-- Border tambahan untuk kesan "gallery frame" --}}
+                            <div class="relative bg-gradient-to-br from-[#163832] to-[#0B2B26] rounded-xl shadow-lg overflow-hidden group transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer border border-[#DAF1DE]"> 
                                 <a href="{{ route('user.gallery.show', $art->id) }}">
                                     <img src="{{ Storage::url($art->image_path) }}" alt="{{ $art->title }}" class="w-full h-64 object-cover object-center transition-transform duration-300 group-hover:scale-110">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-[#051F20]/70 to-transparent transition-all duration-300 opacity-0 group-hover:opacity-100"></div> {{-- Gradasi overlay gelap pada hover --}}
+                                    <div class="absolute inset-0 bg-gradient-to-t from-[#051F20]/70 to-transparent transition-all duration-300 opacity-0 group-hover:opacity-100"></div> 
                                     
                                     <div class="p-4 relative z-10 text-white">
-                                        <h3 class="text-xl font-bold mb-1 truncate">{{ $art->title }}</h3> {{-- Lebih tebal --}}
+                                        <h3 class="text-xl font-bold mb-1 truncate">{{ $art->title }}</h3> 
                                         <p class="text-[#DAF1DE] text-sm mb-2">Oleh: {{ $art->user->name ?? 'Anonim' }}</p>
                                         <p class="text-xs text-[#8E8B9B] line-clamp-2">{{ Str::limit($art->description, 100) }}</p>
                                     </div>
@@ -60,7 +59,6 @@
                         @endforelse
                     </div>
 
-                    {{-- Pagination --}}
                     <div class="mt-10 flex justify-center">
                         {{ $arts->links() }}
                     </div>

@@ -9,31 +9,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Gate; // Penting: Import Gate
+use Illuminate\Support\Facades\Gate;
 
 class ArtworkController extends Controller
 {
-    /**
-     * Tampilkan semua karya seni milik user yang sedang login.
-     */
     public function index(): \Illuminate\View\View
     {
         $arts = Auth::user()->arts()->latest()->paginate(10);
-        return view('user.artwork.index', compact('arts')); // View baru: user.artwork.index
+        return view('user.artwork.index', compact('arts'));
     }
 
-    /**
-     * Tampilkan form untuk mengunggah karya seni baru.
-     */
     public function create(): \Illuminate\View\View
     {
-        Gate::authorize('authenticated-user'); // Pastikan user terautentikasi bisa upload
-        return view('user.artwork.create'); // View baru: user.artwork.create
+        Gate::authorize('authenticated-user');
+        return view('user.artwork.create');
     }
 
-    /**
-     * Simpan karya seni yang baru diunggah.
-     */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         Gate::authorize('authenticated-user');
@@ -55,21 +46,15 @@ class ArtworkController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return Redirect::route('user.artwork.index')->with('success', 'Karya seni berhasil diunggah!'); // Redirect ke rute baru
+        return Redirect::route('user.artwork.index')->with('success', 'Karya seni berhasil diunggah!');
     }
 
-    /**
-     * Tampilkan form untuk mengedit karya seni tertentu (milik user).
-     */
     public function edit(Art $art): \Illuminate\View\View
     {
-        Gate::authorize('manage-own-art', $art); // Pastikan user adalah pemiliknya
-        return view('user.artwork.edit', compact('art')); // View baru: user.artwork.edit
+        Gate::authorize('manage-own-art', $art);
+        return view('user.artwork.edit', compact('art'));
     }
 
-    /**
-     * Update karya seni tertentu (milik user).
-     */
     public function update(Request $request, Art $art): \Illuminate\Http\RedirectResponse
     {
         Gate::authorize('manage-own-art', $art);
@@ -95,12 +80,9 @@ class ArtworkController extends Controller
 
         $art->save();
 
-        return Redirect::route('user.artwork.index')->with('success', 'Karya seni berhasil diperbarui!'); // Redirect ke rute baru
+        return Redirect::route('user.artwork.index')->with('success', 'Karya seni berhasil diperbarui!');
     }
 
-    /**
-     * Hapus karya seni tertentu (milik user).
-     */
     public function destroy(Art $art): \Illuminate\Http\RedirectResponse
     {
         Gate::authorize('manage-own-art', $art);
@@ -108,6 +90,6 @@ class ArtworkController extends Controller
             Storage::disk('public')->delete($art->image_path);
         }
         $art->delete();
-        return Redirect::route('user.artwork.index')->with('success', 'Karya seni berhasil dihapus!'); // Redirect ke rute baru
+        return Redirect::route('user.artwork.index')->with('success', 'Karya seni berhasil dihapus!');
     }
 }
